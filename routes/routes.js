@@ -10,5 +10,7 @@ router.get('/get-Product/:id',product.getProduct)
 router.post('/register',user.userRegister)
 router.post('/login',user.userLogin)
 router.post('/addToWishlist',jwtMiddle,wishlist.addToWishList)
+router.get('/getFromWishlist',jwtMiddle,wishlist.getWishList)
+router.delete('/removeFromWishlist/:id',jwtMiddle,wishlist.removeFromWishList)
 
 module.exports = router
