@@ -15,6 +15,9 @@ router.get('/getFromWishlist',jwtMiddle,wishlist.getWishList)
 router.delete('/removeFromWishlist/:id',jwtMiddle,wishlist.removeFromWishList)
 router.post('/addCart',jwtMiddle,cart.addToCart)
 router.get('/getCart',jwtMiddle,cart.getCart)
+router.get('/cartInc/:id',jwtMiddle,cart.cartInc)
+router.get('/cartDec/:id',jwtMiddle,cart.cartDec)
 router.delete('/removeCart/:id',jwtMiddle,cart.removeFromCart)
+router.delete('/emptyCart',jwtMiddle,cart.emptyCart)
 
 module.exports = router

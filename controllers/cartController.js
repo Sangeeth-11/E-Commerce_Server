@@ -44,3 +44,44 @@ exports.removeFromCart= async(req,res)=>{
         
     }
 }
+
+exports.cartInc = async(req,res)=>{
+    try {
+        const cartId= req.params.id
+        const result = await carts.findById({_id:cartId})
+        result.quantity+=1
+        result.totalPrice = result.quantity * result.price
+        await result.save()
+        res.status(200).json(result)
+    } catch (error) {
+        res.status(404).json(error) 
+    }
+}
+exports.cartDec = async(req,res)=>{
+    try {
+        const cartId= req.params.id
+        const result = await carts.findById({_id:cartId})
+        if (result.quantity==1) {
+            const result1 = await carts.findByIdAndDelete({_id:cartId})
+            res.status(200).json(result1)
+        } else { 
+            result.quantity-=1
+            result.totalPrice = result.quantity * result.price
+            await result.save()
+            res.status(200).json(result)
+        }
+    } catch (error) {
+        res.status(404).json(error) 
+    }
+}
+
+exports.emptyCart= async(req,res)=>{
+    try {
+        const userId= req.payload
+        const result = await carts.deleteMany({userId})
+        res.status(200).json(result)
+        } catch (error) {
+        res.status(404).json(error)
+        
+    }
+}
