@@ -11,7 +11,7 @@ const jwtMiddle = (req, res, next) => {
             res.status(406).json("Token is not Available")
         }
     } catch (error) {
-        res.status(406).json("Authorization failed", error)
+        res.status(406).json("plz login first")
 
     }
 }
